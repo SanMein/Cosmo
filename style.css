@@ -1,0 +1,643 @@
+:root {
+    --primary: #3a86ff;
+    --secondary: #00b4d8;
+    --accent: #ff5400;
+    --success: #2ecc71;
+    --danger: #e74c3c;
+    --warning: #f39c12;
+    --info: #3498db;
+    --dark: #121212;
+    --light: #f8f9fa;
+    --muted: #95a5a6;
+    --bg-dark: #1a1a1a;
+    --bg-light: rgba(30, 30, 30, 0.95);
+    --text-dark: #e0e0e0;
+    --text-light: #ffffff;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: var(--bg-dark);
+    color: var(--light);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.space-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+#background-canvas, #rocket-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    image-rendering: optimizeSpeed;
+    will-change: transform;
+}
+
+#rocket-canvas {
+    z-index: -1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    position: relative;
+    z-index: 1;
+    flex: 1;
+}
+
+header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 12px 12px 0 0;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    overflow: hidden;
+    margin-top: 1rem;
+    z-index: 2;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    animation: pulse 10s infinite;
+    z-index: -1;
+}
+
+.header-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="white"/><circle cx="50" cy="30" r="1" fill="white"/><circle cx="80" cy="20" r="1" fill="white"/><circle cx="30" cy="70" r="1" fill="white"/><circle cx="70" cy="80" r="1" fill="white"/></svg>');
+    opacity: 0.3;
+    z-index: -1;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.rocket-icon {
+    display: inline-block;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+nav {
+    background: rgba(51, 51, 51, 0.9);
+    padding: 0.5rem 0;
+    border-radius: 0 0 12px 12px;
+    box-shadow: var(--card-shadow);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+nav button {
+    background: none;
+    border: none;
+    color: var(--light);
+    padding: 0.75rem 1.5rem;
+    margin: 0.2rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    border-radius: 8px;
+    z-index: 1;
+    overflow: hidden;
+}
+
+nav button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+nav button:hover::before {
+    opacity: 0.2;
+}
+
+nav button.active {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+nav button.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 3px 3px 0 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    min-height: 50vh; /* Минимальная высота, чтобы не схлопывалась */
+}
+
+.tab-panel {
+    display: none;
+    padding: 1.5rem;
+    background: var(--bg-light);
+    border-radius: 12px;
+    margin-top: 1rem;
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease-out;
+    flex: 1; /* Чтобы все панели занимали одинаковую высоту */
+}
+
+.tab-panel.visible {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#resources {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    background: var(--bg-light); /* Изменено на темный фон */
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 1rem;
+}
+
+#resources span {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05); /* Изменено на темный фон */
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+#resources span:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.1); /* Изменено на темный фон */
+}
+
+.resource-bar {
+  width: 100px;
+  height: 8px;
+  background-color: var(--dark); /* Изменено на темный фон */
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+.resource-bar > div {
+  height: 100%;
+  background-color: var(--accent);
+  transition: width 0.5s ease;
+}
+.fuel-bar > div { background-color: var(--success); }
+.parts-bar > div { background-color: var(--info); }
+.rocket-parts-bar > div { background-color: var(--primary); }
+
+.rocket-card, .mission-card, .tech-card, .shop-card, .achiev-card {
+    background: var(--bg-light);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.rocket-card::before, .mission-card::before, .tech-card::before, .shop-card::before, .achiev-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    animation: slide 3s infinite;
+}
+
+@keyframes slide {
+    0% { left: -100%; }
+    20% { left: 0; }
+    100% { left: 100%; }
+}
+
+.rocket-card:hover, .mission-card:hover, .tech-card:hover, .shop-card:hover, .achiev-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.rocket-card .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.8rem;
+}
+
+.rocket-card .actions button, .mission-card button, .tech-card button, .shop-card button {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.rocket-card .actions button:disabled, .mission-card button:disabled, .tech-card button:disabled, .shop-card button:disabled {
+    background: var(--muted);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.rocket-card .actions button:hover:not(:disabled),
+.mission-card button:hover:not(:disabled),
+.tech-card button:hover:not(:disabled),
+.shop-card button:hover:not(:disabled) {
+    background: var(--accent);
+    transform: scale(1.05);
+}
+
+.status-ready { color: var(--success); }
+.status-preparing { color: var(--warning); animation: blink 1s infinite; }
+.status-exploring { color: var(--info); }
+.status-failed { color: var(--danger); }
+
+@keyframes blink {
+    50% { opacity: 0.5; }
+}
+
+#notifications {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 1000;
+}
+
+.notify {
+    background: var(--bg-light);
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    animation: slideIn 0.3s ease-out;
+    border-left: 4px solid transparent;
+    max-width: 300px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    margin-bottom: 0.5rem; /* Добавлен отступ между уведомлениями */
+}
+
+.notify.good { border-left-color: var(--success); }
+.notify.bad { border-left-color: var(--danger); }
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Затемненный фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(8px); /* Усиленное размытие */
+    -webkit-backdrop-filter: blur(8px);
+    animation: fadeInBg 0.3s ease-out;
+}
+
+@keyframes fadeInBg {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal {
+    background: var(--bg-light);
+    padding: 2rem;
+    border-radius: 16px; /* Более мягкие углы */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); /* Более выраженная тень */
+    width: min(90%, 500px);
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Пружинящая анимация */
+}
+
+@keyframes popIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal button {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    margin: 0.5rem 0.25rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.modal button.closebtn {
+    background: var(--danger);
+}
+
+.modal button:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.timer {
+    color: var(--warning);
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    animation: pulseTimer 2s infinite;
+}
+
+@keyframes pulseTimer {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin: 0.5rem 0;
+    overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 5px;
+    transition: width 0.3s ease;
+}
+
+.shop-list, .mission-list, .tech-tree, .achievements-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.unlocked {
+    border-left: 4px solid var(--success);
+}
+
+.locked {
+    opacity: 0.7;
+    filter: grayscale(30%);
+}
+
+.good { color: var(--success); }
+.bad { color: var(--danger); }
+.reward { color: var(--accent); }
+.warning { color: var(--warning); }
+
+/* Updated footer styles */
+footer {
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--light);
+    padding: 1.5rem 1rem;
+    text-align: center;
+    margin-top: 2rem;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.7);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+footer a {
+    color: var(--light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    margin: 0 0.3rem;
+}
+
+footer a:hover {
+    color: var(--accent);
+}
+
+footer button {
+    background: linear-gradient(135deg, var(--info), var(--primary));
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+}
+
+footer button:hover {
+    background: linear-gradient(135deg, var(--primary), var(--info));
+    transform: translateY(-2px);
+}
+
+/* New styles for the add rocket form */
+.add-rocket-form {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 12px;
+}
+
+.add-rocket-form input {
+    flex: 1;
+    padding: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--text-light);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.add-rocket-form input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.5);
+}
+
+.add-rocket-form button {
+    background: linear-gradient(135deg, var(--success), var(--info));
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.add-rocket-form button:hover {
+    background: linear-gradient(135deg, var(--info), var(--success));
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 0.5rem;
+    }
+
+    header {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    nav button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .tab-panel {
+        padding: 1rem;
+    }
+
+    .shop-list, .mission-list, .tech-tree, .achievements-list {
+        grid-template-columns: 1fr;
+    }
+
+    .rocket-card .actions {
+        flex-direction: column;
+    }
+
+    .rocket-card .actions button {
+        width: 100%;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #resources {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #resources span {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .modal {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .add-rocket-form {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .add-rocket-form input, .add-rocket-form button {
+        width: 100%;
+    }
+}

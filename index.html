@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmo Sim</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="space-background">
+        <canvas id="background-canvas"></canvas>
+        <canvas id="rocket-canvas"></canvas>
+    </div>
+
+    <div class="container">
+
+        <header>
+            <h1>Cosmo Sim <span class="rocket-icon">🚀</span></h1>
+        </header>
+
+        <nav>
+            <div class="nav-container">
+                <button id="tab-main" class="active"><i class="fas fa-satellite"></i> Космодром</button>
+                <button id="tab-missions"><i class="fas fa-map-marked-alt"></i> Миссии</button>
+                <button id="tab-tech"><i class="fas fa-flask"></i> Технологии</button>
+                <button id="tab-shop"><i class="fas fa-store"></i> Магазин</button>
+                <button id="tab-stats"><i class="fas fa-chart-line"></i> Статистика</button>
+            </div>
+        </nav>
+
+        <main>
+            <div id="panel-main" class="tab-panel visible">
+                <div id="resources"></div>
+                <div id="rockets"></div>
+                <div id="history"></div>
+            </div>
+
+            <div id="panel-missions" class="tab-panel"></div>
+
+            <div id="panel-tech" class="tab-panel"></div>
+
+            <div id="panel-shop" class="tab-panel"></div>
+
+            <div id="panel-stats" class="tab-panel"></div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div>
+                    <button id="savebtn">Сохранить</button>
+                    <button id="loadbtn">Загрузить</button>
+                    <button id="resetbtn">Сбросить</button>
+                </div>
+                <div class="footer-text">
+                    &copy; 2025 Cosmo Sim. All Rights Reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div id="notifications"></div>
+
+    <script src="game.js"></script>
+</body>
+</html>
