@@ -73,29 +73,6 @@ header {
     z-index: 2;
 }
 
-header::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
-    animation: pulse 10s infinite;
-    z-index: -1;
-}
-
-.header-stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="white"/><circle cx="50" cy="30" r="1" fill="white"/><circle cx="80" cy="20" r="1" fill="white"/><circle cx="30" cy="70" r="1" fill="white"/><circle cx="70" cy="80" r="1" fill="white"/></svg>');
-    opacity: 0.3;
-    z-index: -1;
-}
-
 h1 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
@@ -105,16 +82,11 @@ h1 {
 
 .rocket-icon {
     display: inline-block;
-    animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    /* Убрана анимация float */
 }
 
 nav {
-    background: rgba(51, 51, 51, 0.9);
+    background:  rgba(51, 51, 51, 0.9);
     padding: 0.5rem 0;
     border-radius: 0 0 12px 12px;
     box-shadow: var(--card-shadow);
@@ -165,7 +137,7 @@ nav button:hover::before {
 
 nav button.active {
     background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
+    /* Убран transform: translateY(-2px); */
 }
 
 nav button.active::after {
@@ -183,7 +155,7 @@ nav button.active::after {
 main {
     display: flex;
     flex-direction: column;
-    min-height: 50vh; /* Минимальная высота, чтобы не схлопывалась */
+    min-height: 50vh;
 }
 
 .tab-panel {
@@ -195,17 +167,12 @@ main {
     box-shadow: var(--card-shadow);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    animation: fadeIn 0.3s ease-out;
-    flex: 1; /* Чтобы все панели занимали одинаковую высоту */
+    /* Убрана анимация fadeIn */
+    flex: 1;
 }
 
 .tab-panel.visible {
     display: block;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 #resources {
@@ -213,7 +180,7 @@ main {
     justify-content: space-around;
     flex-wrap: wrap;
     gap: 0.5rem;
-    background: var(--bg-light); /* Изменено на темный фон */
+    background: var(--bg-light);
     padding: 1rem;
     border-radius: 12px;
     box-shadow: var(--card-shadow);
@@ -224,7 +191,7 @@ main {
     font-size: 1rem;
     padding: 0.5rem 1rem;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.05); /* Изменено на темный фон */
+    background: rgba(255, 255, 255, 0.05);
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
@@ -232,14 +199,14 @@ main {
 }
 
 #resources span:hover {
-    transform: scale(1.05);
-    background: rgba(255, 255, 255, 0.1); /* Изменено на темный фон */
+    /* Убран transform: scale(1.05); */
+    background: rgba(255,  255, 255, 0.1);
 }
 
 .resource-bar {
   width: 100px;
   height: 8px;
-  background-color: var(--dark); /* Изменено на темный фон */
+  background-color: var(--dark);
   border-radius: 4px;
   overflow: hidden;
   margin-top: 4px;
@@ -259,7 +226,7 @@ main {
     margin-bottom: 1rem;
     border-radius: 12px;
     box-shadow: var(--card-shadow);
-    transition: all 0.3s ease;
+    /* Убран transition: all 0.3s ease; */
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(5px);
@@ -274,17 +241,11 @@ main {
     width: 100%;
     height: 3px;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
-    animation: slide 3s infinite;
-}
-
-@keyframes slide {
-    0% { left: -100%; }
-    20% { left: 0; }
-    100% { left: 100%; }
+    /* Убрана анимация slide */
 }
 
 .rocket-card:hover, .mission-card:hover, .tech-card:hover, .shop-card:hover, .achiev-card:hover {
-    transform: translateY(-5px);
+    /* Убран transform: translateY(-5px); */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -321,17 +282,13 @@ main {
 .tech-card button:hover:not(:disabled),
 .shop-card button:hover:not(:disabled) {
     background: var(--accent);
-    transform: scale(1.05);
+    /* Убран transform: scale(1.05); */
 }
 
 .status-ready { color: var(--success); }
-.status-preparing { color: var(--warning); animation: blink 1s infinite; }
+.status-preparing { color: var(--warning); /* Убрана анимация blink */ }
 .status-exploring { color: var(--info); }
-.status-failed { color: var(--danger); }
-
-@keyframes blink {
-    50% { opacity: 0.5; }
-}
+.status-failed  { color: var(--danger); }
 
 #notifications {
     position: fixed;
@@ -348,21 +305,16 @@ main {
     padding: 1rem 1.5rem;
     border-radius: 10px;
     box-shadow: var(--card-shadow);
-    animation: slideIn 0.3s ease-out;
+    /* Убрана анимация slideIn */
     border-left: 4px solid transparent;
     max-width: 300px;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    margin-bottom: 0.5rem; /* Добавлен отступ между уведомлениями */
+    margin-bottom: 0.5rem;
 }
 
 .notify.good { border-left-color: var(--success); }
 .notify.bad { border-left-color: var(--danger); }
-
-@keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
 
 .modal-bg {
     position: fixed;
@@ -370,35 +322,25 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85); /* Затемненный фон */
+    background: rgba(0, 0, 0, 0.85);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 2000;
-    backdrop-filter: blur(8px); /* Усиленное размытие */
+    backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    animation: fadeInBg 0.3s ease-out;
-}
-
-@keyframes fadeInBg {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    /* Убрана анимация fadeInBg */
 }
 
 .modal {
     background: var(--bg-light);
     padding: 2rem;
-    border-radius: 16px; /* Более мягкие углы */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); /* Более выраженная тень */
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0,  0, 0.6);
     width: min(90%, 500px);
     max-height: 90vh;
     overflow-y: auto;
-    animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Пружинящая анимация */
-}
-
-@keyframes popIn {
-    from { transform: scale(0.7); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+    /* Убрана анимация popIn */
 }
 
 .modal button {
@@ -419,7 +361,7 @@ main {
 
 .modal button:hover {
     background: var(--accent);
-    transform: translateY(-2px);
+    /* Убран transform: translateY(-2px); */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -432,13 +374,7 @@ main {
     padding: 0.3rem 0.6rem;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
-    animation: pulseTimer 2s infinite;
-}
-
-@keyframes pulseTimer {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+    /* Убрана анимация pulseTimer */
 }
 
 .progress-bar {
@@ -477,9 +413,8 @@ main {
 .good { color: var(--success); }
 .bad { color: var(--danger); }
 .reward { color: var(--accent); }
-.warning { color: var(--warning); }
+.warning  { color: var(--warning); }
 
-/* Updated footer styles */
 footer {
     background: rgba(0, 0, 0, 0.7);
     color: var(--light);
@@ -513,23 +448,22 @@ footer a:hover {
 }
 
 footer button {
-    background: linear-gradient(135deg, var(--info), var(--primary));
+    background:  linear-gradient(135deg, var(--info), var(--primary));
     border: none;
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all  0.3s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-size: 0.9rem;
 }
 
 footer button:hover {
     background: linear-gradient(135deg, var(--primary), var(--info));
-    transform: translateY(-2px);
+    /* Убран transform: translateY(-2px); */
 }
 
-/* New styles for the add rocket form */
 .add-rocket-form {
     display: flex;
     gap: 1rem;
@@ -573,7 +507,7 @@ footer button:hover {
 
 .add-rocket-form button:hover {
     background: linear-gradient(135deg, var(--info), var(--success));
-    transform: translateY(-2px);
+    /* Убран transform: translateY(-2px); */
 }
 
 @media (max-width: 768px) {
@@ -607,7 +541,7 @@ footer button:hover {
     }
 
     .rocket-card .actions button {
-        width: 100%;
+         width: 100%;
     }
 
     .footer-content {
