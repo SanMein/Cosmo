@@ -1,9 +1,5 @@
 // =========== MAIN RENDER & INIT ===========
-// Объединённый рендер с интервалом 5 секунд, только если вкладка активна
-setInterval(() => {
-    if (document.hidden) return;
-    renderAll();
-}, 5000);
+setInterval(renderAll, 5000);
 
 // Инициализация игры
 window.onload = function() {
