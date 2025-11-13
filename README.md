@@ -193,5 +193,7 @@ This project is provided without an explicit license. If you want permissive reu
 ## Contact / Контакты
 
 Repository: https://github.com/SanMein/Cosmo
+Reddit: https://www.reddit.com/r/CosmoSM/
 
 Репозиторий: https://github.com/SanMein/Cosmo
+Реддит: https://www.reddit.com/r/CosmoSM/
