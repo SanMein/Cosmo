@@ -3,73 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmo Sim</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <title>Cosmo Sim - Космическая симуляция</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-
     <div class="space-background">
         <canvas id="background-canvas"></canvas>
         <canvas id="rocket-canvas"></canvas>
     </div>
-
     <div class="container">
-
         <header>
+            <div class="header-stars"></div>
             <h1>Cosmo Sim <span class="rocket-icon">🚀</span></h1>
+            <p>Управляйте своей космической программой и покоряйте Вселенную!</p>
         </header>
 
         <nav>
             <div class="nav-container">
-                <button id="tab-main" class="active"> <i class="fas fa-satellite"></i> Космодром</button>
-                <button id="tab-missions"> <i class="fas fa-map-marked-alt"></i> Миссии</button>
-                <button id="tab-tech"> <i class="fas fa-flask"></i> Технологии</button>
-                <button id="tab-shop"> <i class="fas fa-store"></i> Магазин</button>
-                <button id="tab-stats"> <i class="fas fa-chart-line"></i> Статистика</button>
+                <button class="nav-btn active" data-tab="rockets">
+                    <i class="fas fa-rocket"></i> Космодром
+                </button>
+                <button class="nav-btn" data-tab="missions">
+                    <i class="fas fa-map"></i> Миссии
+                </button>
+                <button class="nav-btn" data-tab="tech">
+                    <i class="fas fa-flask"></i> Технологии
+                </button>
+                <button class="nav-btn" data-tab="shop">
+                    <i class="fas fa-shopping-cart"></i> Магазин
+                </button>
+                <button class="nav-btn" data-tab="stats">
+                    <i class="fas fa-chart-bar"></i> Статистика
+                </button>
             </div>
         </nav>
 
         <main>
-            <div id="panel-main" class="tab-panel visible">
-                <div id="resources"></div>
-                <div id="rockets"></div>
-                <div id="history"></div>
-            </div>
+            <section class="resources" id="resources">
+                <!-- Resources populated by JavaScript -->
+            </section>
 
-            <div id="panel-missions" class="tab-panel"></div>
+            <section id="rockets" class="tab-panel active">
+                <div class="panel-header">
+                    <h2><i class="fas fa-rocket"></i> Космодром</h2>
+                    <div class="rocket-count">
+                        <span id="rocket-count">1/4</span> ракет
+                    </div>
+                </div>
 
-            <div id="panel-tech" class="tab-panel"></div>
+                <div class="add-rocket-form">
+                    <input type="text" id="rocket-name" placeholder="Название ракеты" maxlength="20">
+                    <button id="add-rocket-btn">
+                        <i class="fas fa-plus"></i> Создать ракету
+                    </button>
+                </div>
 
-            <div id="panel-shop" class="tab-panel"></div>
+                <div class="rocket-list" id="rocket-list">
+                    <!-- Rockets populated by JavaScript -->
+                </div>
+            </section>
 
-            <div id="panel-stats" class="tab-panel"></div>
+            <section id="missions" class="tab-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-map"></i> Доступные миссии</h2>
+                    <div class="mission-progress">
+                        Выполнено: <span id="completed-missions">0</span>
+                    </div>
+                </div>
+                <div class="mission-list" id="mission-list">
+                    <!-- Missions populated by JavaScript -->
+                </div>
+            </section>
+
+            <section id="tech" class="tab-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-flask"></i> Дерево технологий</h2>
+                    <div class="science-counter">
+                        <i class="fas fa-atom"></i> <span id="science-count">5</span>
+                    </div>
+                </div>
+                <div class="tech-tree" id="tech-tree">
+                    <!-- Technologies populated by JavaScript -->
+                </div>
+            </section>
+
+            <section id="shop" class="tab-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-shopping-cart"></i> Магазин улучшений</h2>
+                    <div class="money-counter">
+                        <i class="fas fa-coins"></i> <span id="money-count">1,000,000</span>
+                    </div>
+                </div>
+                <div class="shop-list" id="shop-list">
+                    <!-- Shop items populated by JavaScript -->
+                </div>
+            </section>
+
+            <section id="stats" class="tab-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-chart-bar"></i> Статистика и достижения</h2>
+                    <div class="play-time">
+                        Время игры: <span id="play-time">0д 0ч</span>
+                    </div>
+                </div>
+
+                <div class="stats-grid" id="stats-grid">
+                    <!-- Stats populated by JavaScript -->
+                </div>
+
+                <h3 class="history-title">
+                    <i class="fas fa-history"></i> История миссий
+                </h3>
+                <div class="history-list" id="history-list">
+                    <!-- History populated by JavaScript -->
+                </div>
+            </section>
+
+            <div id="notifications"></div>
         </main>
 
         <footer>
             <div class="footer-content">
-                <div>
-                    <button id="savebtn">Сохранить</button>
-                    <button id="loadbtn">Загрузить</button>
-                    <button id="resetbtn">Сбросить</button>
+                <div class="game-controls">
+                    <button id="save-btn">
+                        <i class="fas fa-save"></i> Сохранить
+                    </button>
+                    <button id="load-btn">
+                        <i class="fas fa-folder-open"></i> Загрузить
+                    </button>
+                    <button id="reset-btn">
+                        <i class="fas fa-redo"></i> Сбросить
+                    </button>
                 </div>
-                <div class="footer-text">
-                    &copy; 2025 Cosmo Sim. All Rights Reserved.
+                <div class="footer-info">
+                    <div>Cosmo Sim v2.0</div>
+                    <div>© 2025 Все права защищены</div>
                 </div>
             </div>
         </footer>
     </div>
 
-    <div id="notifications"></div>
+    <!-- Core Game Scripts -->
+    <script src="js/core/state.js"></script>
+    <script src="js/core/utils.js"></script>
+    <script src="js/core/canvas.js"></script>
 
-    <script src="js/state.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/dom.js"></script>
-    <script src="js/render.js"></script>
-    <script src="js/canvas.js"></script>
-    <script src="js/rockets.js"></script>
-    <script src="js/missions.js"></script>
-    <script src="js/shop.js"></script>
-    <script src="js/main.js"></script>
+    <!-- Game Modules -->
+    <script src="js/modules/save.js"></script>
+    <script src="js/modules/rockets.js"></script>
+    <script src="js/modules/missions.js"></script>
+    <script src="js/modules/tech.js"></script>
+    <script src="js/modules/shop.js"></script>
+    <script src="js/modules/stats.js"></script>
+
+    <!-- Main Game Logic (должен быть последним) -->
+    <script src="js/core/game.js"></script>
+
+    <!-- Initialization -->
+    <script src="js/init.js"></script>
 </body>
 </html>

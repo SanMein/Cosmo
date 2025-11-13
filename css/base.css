@@ -1,0 +1,88 @@
+:root {
+    --primary: #3a86ff;
+    --secondary: #00b4d8;
+    --accent: #ff5400;
+    --success: #2ecc71;
+    --danger: #e74c3c;
+    --warning: #f39c12;
+    --info: #3498db;
+    --dark: #121212;
+    --light: #f8f9fa;
+    --muted: #95a5a6;
+    --bg-dark: #1a1a1a;
+    --bg-light: rgba(30, 30, 30, 0.95);
+    --text-dark: #e0e0e0;
+    --text-light: #ffffff;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+    --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+    --gradient-success: linear-gradient(135deg, var(--success), var(--info));
+    --gradient-warning: linear-gradient(135deg, var(--warning), var(--accent));
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--bg-dark);
+    color: var(--light);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.space-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #000428, #004e92);
+}
+
+#background-canvas, #rocket-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#rocket-canvas {
+    z-index: -1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    position: relative;
+    z-index: 1;
+    flex: 1;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
